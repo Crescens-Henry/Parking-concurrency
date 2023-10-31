@@ -1,4 +1,6 @@
 # Concurrent Parking Lot Simulation
+![image](https://github.com/Crescens-Henry/Parking-concurrency/assets/94093619/99fffc96-cce6-483e-a765-21380e84dc11)
+
 This Go project simulates a parking lot using concurrent goroutines. It demonstrates various concurrent programming concepts, including the use of goroutines, channels, and mutex locks. The simulation allows cars to enter, park, and exit a parking lot with a limited number of spaces. It also visualizes the process using the Fyne graphical user interface (GUI) library.
 
 ## Features
