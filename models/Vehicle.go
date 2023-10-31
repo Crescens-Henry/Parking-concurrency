@@ -28,7 +28,7 @@ func GenerateCar(n int, park *Park) {
 	park.Space <- true
 	for i := 0; i < n; i++ {
 		CarImg := canvas.NewImageFromURI(storage.NewFileURI("./assets/car.png"))
-		CarImg.Resize(fyne.NewSize(65, 100))
+		CarImg.Resize(fyne.NewSize(50, 100))
 		x := rand.Intn(700-100+1) + 1
 		CarImg.Move(fyne.NewPos(float32(x), 500))
 
@@ -39,7 +39,6 @@ func GenerateCar(n int, park *Park) {
 		go NewCar.RunCar()
 		Wait := rand.Intn(700-100+1) + 1
 		time.Sleep(time.Duration(Wait) * time.Millisecond)
-
 	}
 
 }
@@ -51,7 +50,7 @@ func (v *Car) RunCar() {
 	y := float32(rand.Intn(300 - 50 + 1))
 	v.skin.Move(fyne.NewPos(x, y))
 	fmt.Println("Carro ", v.I, " Entra")
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(200 * time.Millisecond)
 	v.park.mutex.Unlock()
 
 	Wait := rand.Intn(5-1+1) + 1
@@ -59,8 +58,9 @@ func (v *Car) RunCar() {
 
 	v.park.mutex.Lock()
 	<-v.park.Space
-	v.skin.Move(fyne.NewPos(0, 0))
+
+	v.skin.Move(fyne.NewPos(-100, -100))
 	fmt.Println("Carro ", v.I, " Sale")
-	time.Sleep(500 * time.Millisecond)
+	time.Sleep(200 * time.Millisecond)
 	v.park.mutex.Unlock()
 }

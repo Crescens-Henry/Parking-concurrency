@@ -1,4 +1,4 @@
-package screen
+package scenario
 
 import (
 	"park/models"

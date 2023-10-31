@@ -1,7 +1,7 @@
 package main
 
 import (
-	"park/screen"
+	"park/scenario"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -13,7 +13,7 @@ func main() {
 	w.CenterOnScreen()
 	w.SetFixedSize(true)
 	w.Resize(fyne.NewSize(800, 600))
-	screen.NewScene(w)
+	scenario.NewScene(w)
 	w.ShowAndRun()
 
 }
