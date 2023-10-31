@@ -16,7 +16,7 @@ type GameScene struct {
 }
 
 func (s *GameScene) Render() {
-	backgroundImage := canvas.NewImageFromURI(storage.NewFileURI("./assets/park2.png"))
+	backgroundImage := canvas.NewImageFromURI(storage.NewFileURI("./assets/parking.jpg"))
 
 	backgroundImage.Resize(fyne.NewSize(800, 600))
 	backgroundImage.Move(fyne.NewPos(0, 0))
@@ -35,16 +35,16 @@ func NewScene(window fyne.Window) *GameScene {
 	return scene
 }
 
-func (s *GameScene) StartGame() {
-	e := models.NewPark(20)
-	go models.GenerateVehicle(100, e)
-	go s.DrawVehicles(e)
-}
-
-func (s *GameScene) DrawVehicles(e *models.Parking) {
+func (s *GameScene) DrawCars(e *models.Park) {
 	for {
-		imagen := <-e.DrawVehicle
+		imagen := <-e.DrawCar
 		s.content.Add(imagen)
 		s.window.Canvas().Refresh(s.content)
 	}
+}
+
+func (s *GameScene) StartGame() {
+	e := models.NewPark(20)
+	go models.GenerateCar(100, e)
+	go s.DrawCars(e)
 }
