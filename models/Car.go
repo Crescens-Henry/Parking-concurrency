@@ -25,7 +25,6 @@ func NewCar(p *Park, s *canvas.Image) *Car {
 }
 
 func GenerateCar(n int, park *Park) {
-	var carCounter int
 	park.Space <- true
 	for i := 0; i < n; i++ {
 		CarImg := canvas.NewImageFromURI(storage.NewFileURI("./assets/car.png"))
@@ -35,23 +34,14 @@ func GenerateCar(n int, park *Park) {
 
 		NewCar := NewCar(park, CarImg)
 		NewCar.I = i + 1
-		park.OccupiedSpaces++
 
 		park.DrawCar <- CarImg
 		go NewCar.RunCar()
 		Wait := rand.Intn(700-100+1) + 1
 		time.Sleep(time.Duration(Wait) * time.Millisecond)
+
 	}
 
-	// Espera a que todos los carros salgan
-	for carCounter <= n {
-		<-park.CarExit
-		carCounter++
-		if carCounter == n {
-			// Cerrar el canal DrawCar cuando todos los carros hayan salido
-			close(park.DrawCar)
-		}
-	}
 }
 
 func (v *Car) RunCar() {
@@ -61,7 +51,7 @@ func (v *Car) RunCar() {
 	y := float32(rand.Intn(300 - 50 + 1))
 	v.skin.Move(fyne.NewPos(x, y))
 	fmt.Println("Carro ", v.I, " Entra")
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(500 * time.Millisecond)
 	v.park.mutex.Unlock()
 
 	Wait := rand.Intn(5-1+1) + 1
@@ -71,8 +61,6 @@ func (v *Car) RunCar() {
 	<-v.park.Space
 	v.skin.Move(fyne.NewPos(0, 0))
 	fmt.Println("Carro ", v.I, " Sale")
-	v.park.CarExit <- true  // Notifica que el carro ha salido
-	v.park.OccupiedSpaces-- // Disminuye el contador de espacios ocupados
-
+	time.Sleep(500 * time.Millisecond)
 	v.park.mutex.Unlock()
 }
