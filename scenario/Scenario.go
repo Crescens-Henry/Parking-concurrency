@@ -16,7 +16,7 @@ type GameScene struct {
 }
 
 func (s *GameScene) Render() {
-	backgroundImage := canvas.NewImageFromURI(storage.NewFileURI("./assets/parking3.jpg"))
+	backgroundImage := canvas.NewImageFromURI(storage.NewFileURI("./assets/background/parking3.jpg"))
 
 	backgroundImage.Resize(fyne.NewSize(700, 600))
 	backgroundImage.Move(fyne.NewPos(0, 0))

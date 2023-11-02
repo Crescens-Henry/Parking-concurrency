@@ -27,7 +27,7 @@ func NewCar(p *Park, s *canvas.Image) *Car {
 func GenerateCar(n int, park *Park) {
 	park.Space <- true
 	for i := 0; i < n; i++ {
-		CarImg := canvas.NewImageFromURI(storage.NewFileURI("./assets/car.png"))
+		CarImg := canvas.NewImageFromURI(storage.NewFileURI("./assets/sprite/car.png"))
 		CarImg.Resize(fyne.NewSize(50, 100))
 		x := rand.Intn(700-100+1) + 1
 		CarImg.Move(fyne.NewPos(float32(x), 500))
