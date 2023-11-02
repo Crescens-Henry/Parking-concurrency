@@ -40,7 +40,6 @@ func GenerateCar(n int, park *Park) {
 		Wait := rand.Intn(700-100+1) + 1
 		time.Sleep(time.Duration(Wait) * time.Millisecond)
 	}
-
 }
 
 func (v *Car) RunCar() {
@@ -58,9 +57,8 @@ func (v *Car) RunCar() {
 
 	v.park.mutex.Lock()
 	<-v.park.Space
-
-	v.skin.Move(fyne.NewPos(-100, -100))
+	v.skin.Move(fyne.NewPos(0, 0))
 	fmt.Println("Carro ", v.I, " Sale")
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(500 * time.Millisecond)
 	v.park.mutex.Unlock()
 }
